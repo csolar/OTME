@@ -12,20 +12,21 @@
 #################################################
 a = 2
 b = 1
+s = .1 # gamma's shape parameter 
 
 cdf_P = punif
 quantile_P = qunif
 
-cdf_P = pnorm
-quantile_Q = qnorm
+cdf_Q = pgamma
+quantile_Q = qgamma
 
 Phi = function(x,y) (x^a*y^b)
 dPhi_dx = function(x,y) (a*x^(a-1)*y^b)
 dPhi_dy = function(x,y) (b*x^a*y^(b-1))
 
 
-Tx = function (x) (quantile_Q(cdf_P(x)))
-Tinvy = function (y) (quantile_P(cdf_Q(y)))
+Tx = function (x) (quantile_Q(cdf_P(x), s))
+Tinvy = function (y) (quantile_P(cdf_Q(y, s)))
 
 ux = function(x) (integrate(f = function(z) (dPhi_dx(z,Tx(z))),lower = 0,upper = x )$value)
 vy = function(y) (integrate(f = function(z) (dPhi_dy(Tinvy(z),z)),lower = Tx(0),upper = y )$value
@@ -38,7 +39,7 @@ wages = rep(0,nbIndiv)
 for (k in 1:nbIndiv)
 {wages[k] = ux(quantile_P(ranks[k])) }
 
-
+print(wages)
 
 num = 0
 denom = 0
