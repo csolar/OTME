@@ -12,7 +12,7 @@
 #################################################
 a = 2
 b = 1
-s = .1 # gamma's shape parameter 
+s = 1 # gamma's shape parameter 
 
 cdf_P = punif
 quantile_P = qunif
