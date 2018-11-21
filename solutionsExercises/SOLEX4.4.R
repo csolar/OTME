@@ -39,8 +39,6 @@ wages = rep(0,nbIndiv)
 for (k in 1:nbIndiv)
 {wages[k] = ux(quantile_P(ranks[k])) }
 
-print(wages)
-
 num = 0
 denom = 0
 for (i in 1:nbIndiv)
